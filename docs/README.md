@@ -2,6 +2,7 @@
 
 ![CI][1]
 ![Rust toolchain support][2]
+![Documentation on docs.rs][3]
 
 This crate is a place where I take notes when learning about a particular data structure or algorithm in Rust, usually
 by trying to implement a nominal version of the thing myself.
@@ -24,3 +25,4 @@ See LICENSE for details.
 
 [1]: https://github.com/damienstanton/tinystd/workflows/CI/badge.svg
 [2]: https://img.shields.io/badge/Rust%20toolchain-stable-%23DEA484?style=plastic&logo=rust
+[3]: https://docs.rs/tinystd/badge.svg?version=0.1.0
