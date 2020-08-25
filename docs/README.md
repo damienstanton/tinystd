@@ -1,6 +1,6 @@
 # 🤏 tinystd
 
-[![CI][1]]][CI]
+[![CI][1]][CI]
 ![Rust toolchain support][2]
 [![Documentation on docs.rs][3]][Docs]
 
