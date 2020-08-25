@@ -9,6 +9,13 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+
+//! This crate is a place where I take notes when learning about a particular
+//! data structure or algorithm in Rust, usually by trying to implement a
+//! nominal version of the thing myself.
+
+#![doc(html_logo_url = "https://f001.backblazeb2.com/file/dks-public/bw_front_smsq.jpg")]
+#![doc(html_favicon_url = "https://f001.backblazeb2.com/file/dks-public/favicon.ico")]
 pub mod cell;
 pub mod collections;
 pub mod sync;

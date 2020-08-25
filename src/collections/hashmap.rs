@@ -44,12 +44,19 @@ where
         }
         self.data.push((key, value));
     }
-    fn delete(&mut self, key: K) {
+    fn delete(&mut self, key: K) -> bool {
+        let prelen = self.data.len();
         self.data = self
             .data
             .iter()
             .filter_map(|p| if p.0 != key { Some(*p) } else { None })
             .collect();
+        let postlen = self.data.len();
+        if prelen == postlen {
+            false
+        } else {
+            true
+        }
     }
 }
 
@@ -68,7 +75,7 @@ where
     K: Clone + Copy + Default + Eq + Hash,
     V: Clone + Copy + Default + Eq,
 {
-    /// Constructs a new `HashMap<K,V>` using 92,821 as the prime by which to
+    /// Constructs a new `HashMap<K,V>` using 92821 as the prime by which to
     /// modulo each key hash. This number was chosen based on the argument
     /// presented [in this Stack Overflow][1] discussion.
     ///
@@ -82,6 +89,15 @@ where
         }
     }
 
+    /// Inserts `V` at key `K`.
+    /// Example:
+    /// ```
+    /// use tinystd::collections::HashMap;
+    ///
+    /// let mut m = HashMap::<&str, i32>::new();
+    /// m.insert("foo", 1);
+    /// assert_eq!(m.get("foo"), Some(&1));
+    /// ```
     pub fn insert(&mut self, key: K, value: V) {
         let mut hasher = DefaultHasher::new();
         key.hash(&mut hasher);
@@ -89,6 +105,17 @@ where
         self.hash_table[k as usize].set(key, value);
     }
 
+    /// Gets an optional reference to `V` using key `K`. If `K` doesn't exist
+    /// in the map, `None` is returned.
+    /// Example:
+    /// ```
+    /// use tinystd::collections::HashMap;
+    ///
+    /// let mut m = HashMap::<&str, i32>::new();
+    /// m.insert("foo", 1);
+    /// assert_eq!(m.get("foo"), Some(&1));
+    /// assert_eq!(m.get("bar"), None);
+    /// ```
     pub fn get(&mut self, key: K) -> Option<&V> {
         let mut hasher = DefaultHasher::new();
         key.hash(&mut hasher);
@@ -96,10 +123,27 @@ where
         self.hash_table[k as usize].get(key)
     }
 
-    pub fn remove(&mut self, key: K) {
+    /// Deletes the backing data store for the `(K, V)` pair in the map. Returns
+    /// `true` if the key was found in the map --and thus deleted-- otherwise
+    /// returns `false` if the key was not found in the map.
+    /// Example:
+    /// ```
+    /// use tinystd::collections::HashMap;
+    /// // Create and insert a test value
+    /// let mut m = HashMap::<&str, i32>::new();
+    /// m.insert("baz", 1);
+    /// assert_eq!(m.get("baz"), Some(&1));
+    ///
+    /// // Check that "baz" really gets deleted, and that a double-delete is a no-op
+    /// let deleted = m.remove("baz");
+    /// assert_eq!(deleted, true);
+    /// assert_eq!(m.get("baz"), None);
+    /// assert_eq!(m.remove("baz"), false);
+    /// ```
+    pub fn remove(&mut self, key: K) -> bool {
         let mut hasher = DefaultHasher::new();
         key.hash(&mut hasher);
         let k = hasher.finish() % self.key_size;
-        self.hash_table[k as usize].delete(key);
+        self.hash_table[k as usize].delete(key)
     }
 }

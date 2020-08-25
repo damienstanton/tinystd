@@ -58,7 +58,7 @@ impl<T> RefCell<T> {
         }
     }
 
-    /// Return a **mutable ** shared reference to `T`, IFF there exists no other
+    /// Return a **mutable** shared reference to `T`, IFF there exists no other
     /// _exclusive_ references to `T` already given out
     pub fn borrow_mut(&self) -> Option<RefMut<'_, T>> {
         if let RefState::Unshared = self.state.get() {
