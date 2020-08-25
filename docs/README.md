@@ -24,7 +24,7 @@ TODO:
 See LICENSE for details.
 
 [1]: https://github.com/damienstanton/tinystd/workflows/CI/badge.svg
-[2]: https://img.shields.io/badge/Rust%20toolchain-stable-%23DEA484?style=plastic&logo=rust
+[2]: https://img.shields.io/badge/Rust-stable-%23DEA484?&logo=rust
 [3]: https://docs.rs/tinystd/badge.svg?version=0.1.0
 [CI]: https://github.com/damienstanton/tinystd/actions
 [Docs]: https://docs.rs/tinystd/0.1.0/tinystd/
