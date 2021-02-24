@@ -90,9 +90,10 @@ where
     }
 
     /// Inserts `V` at key `K`.
-    /// Example:
+    ///
+    /// ## Example:
     /// ```
-    /// use tinystd::collections::HashMap;
+    /// use tinystd::hashmap::HashMap;
     ///
     /// let mut m = HashMap::<&str, i32>::new();
     /// m.insert("foo", 1);
@@ -107,9 +108,10 @@ where
 
     /// Gets an optional reference to `V` using key `K`. If `K` doesn't exist
     /// in the map, `None` is returned.
-    /// Example:
+    ///
+    /// ## Example:
     /// ```
-    /// use tinystd::collections::HashMap;
+    /// use tinystd::hashmap::HashMap;
     ///
     /// let mut m = HashMap::<&str, i32>::new();
     /// m.insert("foo", 1);
@@ -128,7 +130,7 @@ where
     /// returns `false` if the key was not found in the map.
     /// Example:
     /// ```
-    /// use tinystd::collections::HashMap;
+    /// use tinystd::hashmap::HashMap;
     /// // Create and insert a test value
     /// let mut m = HashMap::<&str, i32>::new();
     /// m.insert("baz", 1);

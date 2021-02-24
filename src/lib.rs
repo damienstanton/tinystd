@@ -14,8 +14,8 @@
 //! data structure or algorithm in Rust, usually by trying to implement a
 //! nominal version of the thing myself.
 
-#![doc(html_logo_url = "https://f001.backblazeb2.com/file/dks-public/bw_front_smsq.jpg")]
 #![doc(html_favicon_url = "https://f001.backblazeb2.com/file/dks-public/favicon.ico")]
-pub mod cell;
-pub mod collections;
-pub mod sync;
+pub mod hashmap;
+pub mod rc;
+pub mod refcell;
+pub mod sort;

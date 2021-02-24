@@ -1,10 +1,15 @@
 [package]
 name = "tinystd"
-version = "0.1.0"
+version = "0.2.0"
 authors = ["Damien Stanton <damien.stanton@gmail.com>"]
 edition = "2018"
 repository = "https://github.com/damienstanton/tinystd"
 license = "Apache-2.0"
 description = "A literate-programming crate for my notes on general data structures and algorithms in Rust"
 
+[[bin]]
+name = "bench-sort"
+path = "src/benches/sorting.rs"
+
 [dependencies]
+rand = "0.8"

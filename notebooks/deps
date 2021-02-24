@@ -1,0 +1,10 @@
+# data stuff
+pandas
+matplotlib
+jupyterlab
+
+# linting
+python-language-server
+pylint
+black
+pytest
