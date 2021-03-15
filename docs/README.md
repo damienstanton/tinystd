@@ -1,6 +1,8 @@
 # 🤏 tinystd
 
 [![Documentation on docs.rs][3]][Docs]
+[![CI (Stable)](https://github.com/damienstanton/tinystd/actions/workflows/rust.yml/badge.svg)](https://github.com/damienstanton/tinystd/actions/workflows/rust.yml)
+[![CI (Nightly)](https://github.com/damienstanton/tinystd/actions/workflows/rust_nightly.yml/badge.svg)](https://github.com/damienstanton/tinystd/actions/workflows/rust_nightly.yml)
 
 This crate is a place where I take notes when learning about a particular data structure or algorithm in Rust, usually
 by trying to implement a nominal version of the thing myself. 
@@ -34,6 +36,6 @@ TODO:
 See LICENSE for details.
 
 [1]: https://github.com/damienstanton/tinystd/workflows/CI/badge.svg
-[3]: https://docs.rs/tinystd/badge.svg?version=0.1.0
+[3]: https://docs.rs/tinystd/badge.svg
 [CI]: https://github.com/damienstanton/tinystd/actions
 [Docs]: https://docs.rs/tinystd
