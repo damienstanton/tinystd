@@ -29,6 +29,17 @@ impl<T> Sender<T> {
         drop(inner);
         self.shared.available.notify_one();
     }
+
+    pub fn send_many(&mut self, ts: Vec<T>) {
+        let mut tds = VecDeque::new();
+        for t in ts {
+            tds.push_back(t);
+        }
+        let mut inner = self.shared.inner.lock().unwrap();
+        inner.queue.append(&mut tds);
+        drop(inner);
+        self.shared.available.notify_one();
+    }
 }
 
 // NOTE: manual impl of Clone required to avoid ambiguity in whether the clone
@@ -61,19 +72,36 @@ impl<T> Drop for Sender<T> {
 /// Rx half of the channel
 pub struct Receiver<T> {
     shared: Arc<Shared<T>>,
+    buffer: VecDeque<T>,
 }
 impl<T> Receiver<T> {
-    pub fn recv(&self) -> Option<T> {
+    pub fn recv(&mut self) -> Option<T> {
+        if let Some(t) = self.buffer.pop_front() {
+            return Some(t);
+        }
         let mut inner = self.shared.inner.lock().unwrap();
         loop {
             match inner.queue.pop_front() {
-                Some(t) => return Some(t),
+                Some(t) => {
+                    if !inner.queue.is_empty() {
+                        std::mem::swap(&mut self.buffer, &mut inner.queue);
+                    }
+                    return Some(t);
+                }
                 None if inner.senders == 0 => return None,
                 None => {
                     inner = self.shared.available.wait(inner).unwrap();
                 }
             }
         }
+    }
+}
+
+impl<T> Iterator for Receiver<T> {
+    type Item = T;
+
+    fn next(&mut self) -> Option<Self::Item> {
+        self.recv()
     }
 }
 
@@ -105,6 +133,7 @@ pub fn channel<T>() -> (Sender<T>, Receiver<T>) {
         },
         Receiver {
             shared: shared.clone(),
+            buffer: VecDeque::new(),
         },
     )
 }
@@ -114,21 +143,21 @@ mod tests {
     use super::*;
     #[test]
     fn send_recv() {
-        let (mut tx, rx) = channel();
+        let (mut tx, mut rx) = channel();
         let x = 10;
         tx.send(x);
         assert_eq!(rx.recv(), Some(x));
     }
     #[test]
     fn send_on_close() {
-        let (tx, rx) = channel::<()>();
+        let (tx, mut rx) = channel::<()>();
         drop(tx);
         assert_eq!(rx.recv(), None);
     }
     #[test]
     fn recv_on_close() {
         // TODO: just a copy of send for now
-        let (tx, rx) = channel::<()>();
+        let (tx, mut rx) = channel::<()>();
         drop(tx);
         assert_eq!(rx.recv(), None);
     }

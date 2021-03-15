@@ -1,7 +1,5 @@
 # 🤏 tinystd
 
-[![CI][1]][CI]
-![Rust toolchain support][2]
 [![Documentation on docs.rs][3]][Docs]
 
 This crate is a place where I take notes when learning about a particular data structure or algorithm in Rust, usually
@@ -15,6 +13,7 @@ Data structures implemented
 - [x] `HashMap<K, V>`
 - [x] `RefCell<T>`
 - [x] `Rc<T>`
+- [x] `channel::<T>`
 
 Algorithms implemented:
 
@@ -35,7 +34,6 @@ TODO:
 See LICENSE for details.
 
 [1]: https://github.com/damienstanton/tinystd/workflows/CI/badge.svg
-[2]: https://img.shields.io/badge/Rust-stable-%23DEA484?&logo=rust
 [3]: https://docs.rs/tinystd/badge.svg?version=0.1.0
 [CI]: https://github.com/damienstanton/tinystd/actions
-[Docs]: https://docs.rs/tinystd/0.1.0/tinystd/
+[Docs]: https://docs.rs/tinystd
