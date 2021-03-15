@@ -11,6 +11,7 @@
 // limitations under the License.
 //! Implementations of a few sorting algorithms, based on a brilliant
 //! [Crust of Rust][1] stream by Jon Gjengset.
+//!
 //! [1]: https://youtu.be/h4RkCyJyXmM
 mod bubble;
 mod insertion;

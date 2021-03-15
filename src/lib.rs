@@ -15,6 +15,7 @@
 //! nominal version of the thing myself.
 
 #![doc(html_favicon_url = "https://f001.backblazeb2.com/file/dks-public/favicon.ico")]
+pub mod channel;
 pub mod hashmap;
 pub mod rc;
 pub mod refcell;
